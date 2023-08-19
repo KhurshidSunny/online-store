@@ -1,0 +1,14 @@
+/* for add to cart container  */
+.product-container {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: auto;
+  border: 1px solid #ccc;
+  overflow: scroll;
+  padding: 10px 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  left: 860px;
+  top: -30px;
+}

@@ -1,0 +1,46 @@
+.sidebar {
+  width: 250px;
+  background-color: #333;
+  padding: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: #fff;
+  height: 500px;
+  border-radius: 10px;
+}
+
+.sidebar-title {
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+.filter-option {
+  margin-bottom: 20px;
+}
+
+.filter-option label {
+  margin-left: 10px;
+}
+
+.rating-label {
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.clear-button {
+  background-color: #fff;
+  color: white;
+  border: none;
+  padding: 10px 80px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 20px;
+  color: #333;
+}
+
+.clear-button:hover {
+  background-color: #2980b9;
+}
