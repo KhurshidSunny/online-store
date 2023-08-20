@@ -1,3 +1,5 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 const productInitialState = {
   products: [],
   cart: [],
@@ -5,68 +7,113 @@ const productInitialState = {
   currentItem: {},
 };
 
-export default function productReducer(state = productInitialState, action) {
-  let updatedProducts = [];
-  switch (action.type) {
-    case "products/loadProducts":
-      return { ...state, products: action.payload };
-    case "products/addToCart":
-      updatedProducts = state.products.map((item) =>
+const productReducer = createSlice({
+  name: "product",
+  initialState: productInitialState,
+  reducers: {
+    loadProducts(state, action) {
+      state.products = [...action.payload];
+    },
+
+    addToCart(state, action) {
+      const updatedProducts = state.products.map((item) =>
         item.id === action.payload.id ? { ...item, add: true } : item
       );
-      return {
-        ...state,
-        cart: [...state.cart, action.payload],
-        products: updatedProducts,
-        currentItem: action.payload,
-      };
-    case "products/removeFromCart":
-      return {
-        ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload.id),
-        products: state.products.map((item) =>
-          item.id === action.payload.id ? { ...item, add: false } : item
-        ),
-      };
-    case "products/showCartModal":
-      return {
-        ...state,
-        isShowModal: !state.isShowModal,
-      };
-    default:
-      return state;
-  }
-}
+      state.cart = [...state.cart, action.payload];
+      state.products = updatedProducts;
+      state.currentItem = action.payload;
+    },
 
-// Action creators
+    removeFromCart(state, action) {
+      state.cart = state.cart.filter((item) => item.id !== action.payload.id);
+
+      state.products = state.products.map((item) =>
+        item.id === action.payload.id ? { ...item, add: false } : item
+      );
+    },
+
+    showCartModal(state) {
+      state.isShowModal = !state.isShowModal;
+    },
+  },
+});
+
+export const { addToCart, removeFromCart, showCartModal } =
+  productReducer.actions;
 
 export function loadProducts() {
-  return async function (dispatch, state) {
+  return async function (dispatch) {
     const res = await fetch(`http://localhost:3000/products`);
     const data = await res.json();
-    dispatch({ type: "products/loadProducts", payload: data });
+    // console.log(data);
+    dispatch({ type: "product/loadProducts", payload: data });
   };
 }
 
-export function addToCart(id, products) {
-  const currentItem = products.find((item) => item.id === id);
+export default productReducer.reducer;
 
-  return {
-    type: "products/addToCart",
-    payload: currentItem,
-  };
-}
+// export default function productReducer(state = productInitialState, action) {
+//   let updatedProducts = [];
+//   switch (action.type) {
+//     case "products/loadProducts":
+//       return { ...state, products: action.payload };
+//     case "products/addToCart":
+//       updatedProducts = state.products.map((item) =>
+//         item.id === action.payload.id ? { ...item, add: true } : item
+//       );
+//       return {
+//         ...state,
+//         cart: [...state.cart, action.payload],
+//         products: updatedProducts,
+//         currentItem: action.payload,
+//       };
+//     case "products/removeFromCart":
+//       return {
+//         ...state,
+//         cart: state.cart.filter((item) => item.id !== action.payload.id),
+//         products: state.products.map((item) =>
+//           item.id === action.payload.id ? { ...item, add: false } : item
+//         ),
+//       };
+//     case "products/showCartModal":
+//       return {
+//         ...state,
+//         isShowModal: !state.isShowModal,
+//       };
+//     default:
+//       return state;
+//   }
+// }
 
-export function removeFromCart(id, cart) {
-  const newCart = cart.find((item) => item.id === id);
-  return {
-    type: "products/removeFromCart",
-    payload: newCart,
-  };
-}
+// // Action creators
 
-export function showCartModal() {
-  return {
-    type: "products/showCartModal",
-  };
-}
+// export function loadProducts() {
+//   return async function (dispatch) {
+//     const res = await fetch(`http://localhost:3000/products`);
+//     const data = await res.json();
+//     dispatch({ type: "product/loadProducts", payload: data });
+//   };
+// }
+
+// export function addToCart(id, products) {
+//   const currentItem = products.find((item) => item.id === id);
+
+//   return {
+//     type: "products/addToCart",
+//     payload: currentItem,
+//   };
+// }
+
+// export function removeFromCart(id, cart) {
+//   const newCart = cart.find((item) => item.id === id);
+//   return {
+//     type: "products/removeFromCart",
+//     payload: newCart,
+//   };
+// }
+
+// export function showCartModal() {
+//   return {
+//     type: "products/showCartModal",
+//   };
+// }

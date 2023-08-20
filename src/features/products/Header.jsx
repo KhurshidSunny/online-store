@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 // import { useProduct } from "../context/ProductContext";
 import AddToCart from "./AddToCart";
 import CustomDropdown from "./AddToCart";

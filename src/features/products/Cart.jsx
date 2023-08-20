@@ -2,13 +2,20 @@
 import "./Cart.css";
 import SingleProduct from "./SingleProduct";
 import { useDispatch, useSelector } from "react-redux";
-import { loadProducts } from "./productSlice";
+
 import { useEffect } from "react";
+import { loadProducts } from "./productSlice";
 
 function Cart() {
   // const { products, sort, byStock, byFastDelivery, byRating, search } =
   //   useProduct();
   const dispatch = useDispatch();
+
+  const productFeature = useSelector((store) => store.product);
+  const { products } = productFeature;
+
+  const filter = useSelector((store) => store.filter);
+  const { sort, byStock, byFastDelivery, byRating, search } = filter;
 
   useEffect(
     function () {
@@ -17,14 +24,9 @@ function Cart() {
     [dispatch]
   );
 
-  const productFeature = useSelector((store) => store.product);
-  const { products } = productFeature;
-
-  const filter = useSelector((store) => store.filter);
-  const { sort, byStock, byFastDelivery, byRating, search } = filter;
+  let sortedProducts = [...products];
 
   function transformProducts() {
-    let sortedProducts = products;
     if (sort) {
       sortedProducts = sortedProducts.sort((a, b) =>
         sort === "lowToHigh" ? a.price - b.price : b.price - a.price

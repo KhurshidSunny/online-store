@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+// import { useState } from "react";
 import "./SingleProduct.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "./productSlice";

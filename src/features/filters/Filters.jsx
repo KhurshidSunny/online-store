@@ -10,7 +10,7 @@ import {
   highToLow,
   lowToHigh,
 } from "./FilterSlice";
-import { Children } from "react";
+
 function Filters() {
   // const { sort, dispatch, byStock, byFastDelivery, byRating } = useProduct();
 
@@ -27,8 +27,8 @@ function Filters() {
           type="radio"
           id="ascending"
           name="sort"
-          value="ascending"
-          onChange={() => dispatch(lowToHigh())}
+          value={sort}
+          onChange={() => dispatch(lowToHigh("lowToHigh"))}
           checked={sort === "lowToHigh" ? true : false}
         />
         <label htmlFor="ascending">Ascending</label>
@@ -38,8 +38,8 @@ function Filters() {
           type="radio"
           id="descending"
           name="sort"
-          value="descending"
-          onChange={() => dispatch(highToLow())}
+          value={sort}
+          onChange={() => dispatch(highToLow("highToLow"))}
           checked={sort === "highToLow" ? true : false}
         />
         <label htmlFor="descending">Descending</label>
@@ -48,7 +48,7 @@ function Filters() {
         <input
           type="checkbox"
           id="outOfStock"
-          onChange={() => dispatch(filterByStock(byStock))}
+          onChange={() => dispatch(filterByStock(!byStock))}
           checked={byStock}
         />
         <label htmlFor="outOfStock">Include out of stock</label>
@@ -63,10 +63,10 @@ function Filters() {
         <label htmlFor="fastDelivery">Fast Delivery only</label>
       </div>
       <span className="rating-label">
-        Rating:{" "}
+        Rating:
         <Rating
           rating={byRating}
-          onHandleClick={(i) => dispatch(filterByRating(i))}
+          onHandleClick={(i) => dispatch(filterByRating(i, byRating))}
           style={{ cursor: "pointer" }}
         />
       </span>
