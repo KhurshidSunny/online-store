@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import "@fortawesome/fontawesome-free/css/all.css";
 
 function Rating({ rating, onHandleClick, style }) {

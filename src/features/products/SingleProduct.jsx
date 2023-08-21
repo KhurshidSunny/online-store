@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 // import { useState } from "react";
 import "./SingleProduct.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "./productSlice";
 // import { useProduct } from "../context/ProductContext";
 
@@ -10,9 +10,6 @@ function SingleProduct({ item }) {
   const starContainerStyle = {
     display: "flex",
   };
-
-  const productFeature = useSelector((store) => store.product);
-  const { products, cart } = productFeature;
 
   const dispatch = useDispatch();
 

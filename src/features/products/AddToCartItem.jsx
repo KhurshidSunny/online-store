@@ -1,12 +1,14 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+
+import { useDispatch } from "react-redux";
 import "./AddToCartItem.css";
-import { useDispatch, useSelector } from "react-redux";
+
 import { removeFromCart } from "./productSlice";
 // import { useProduct } from "../context/ProductContext";
 function AddToCartItem({ item }) {
   // const { removeFromCart } = useProduct();
   const dispatch = useDispatch();
-  const cart = useSelector((store) => store.product.cart);
+
   if (item.add === true) return;
 
   return (
