@@ -66,7 +66,7 @@ function Filters() {
         Rating:
         <Rating
           rating={byRating}
-          onHandleClick={(i) => dispatch(filterByRating(i, byRating))}
+          onHandleClick={(i) => dispatch(filterByRating(i))}
           style={{ cursor: "pointer" }}
         />
       </span>

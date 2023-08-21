@@ -29,8 +29,7 @@ const filterReducer = createSlice({
     },
 
     filterByRating(state, action) {
-      // const { i, rating } = action.payload;
-      state.byRating = action.payload;
+      state.byRating = action.payload + 1;
     },
 
     searchByName(state, action) {
