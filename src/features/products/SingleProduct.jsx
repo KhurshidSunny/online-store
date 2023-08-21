@@ -37,13 +37,11 @@ function SingleProduct({ item }) {
         </div>
 
         {item.add ? (
-          <button onClick={() => dispatch(removeFromCart(item.id, cart))}>
+          <button onClick={() => dispatch(removeFromCart(item))}>
             Remove From Cart
           </button>
         ) : (
-          <button onClick={() => dispatch(addToCart(item.id, products))}>
-            Add to cart
-          </button>
+          <button onClick={() => dispatch(addToCart(item))}>Add to cart</button>
         )}
       </div>
     </li>

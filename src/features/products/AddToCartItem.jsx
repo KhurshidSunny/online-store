@@ -19,7 +19,7 @@ function AddToCartItem({ item }) {
         </div>
         <button
           className="delete-button"
-          onClick={() => dispatch(removeFromCart(item.id, cart))}
+          onClick={() => dispatch(removeFromCart(item))}
         >
           &times;
         </button>
